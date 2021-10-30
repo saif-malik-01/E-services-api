@@ -60,4 +60,44 @@ module.exports.checkOutCart=async (req, res) => {
         cartItem: user.cartItem
     });
 }
+module.exports.deleteAllBooks = async (req,res)=>{
+    const {user} = req.body;
+    if(!user)
+    {
+        return res.status(405).json('Login First');
+    }
+    const {id} = req.params;
+    user = await User.findById(user.id);
+    await user.populate('cartBooks').populate('cartItem');
+    for( var i = 0; i < user.cartBooks.length; i++){ 
+    
+        if ( user.cartBooks[i] === id) { 
+    
+            user.cartBooks.splice(i, 1); 
+        }
+    
+    }
+    await user.save();
+    return res.status(200).json('removed this book')
+}
+module.exports.deleteAllItems = async (req,res)=>{
+    const {user} = req.body;
+    if(!user)
+    {
+        return res.status(405).json('Login First');
+    }
+    const {id} = req.params;
+    user = await User.findById(user.id);
+    await user.populate('cartBooks').populate('cartItem');
+    for( var i = 0; i < user.cartItem.length; i++){ 
+    
+        if ( user.cartItem[i] === id) { 
+    
+            user.cartItem.splice(i, 1); 
+        }
+    
+    }
+    await user.save();
+    return res.status(200).json('removed this item');
+}
 
