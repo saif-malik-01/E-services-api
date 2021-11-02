@@ -100,4 +100,59 @@ module.exports.deleteAllItems = async (req,res)=>{
     await user.save();
     return res.status(200).json('removed this item');
 }
-
+module.exports.setQuantityItem = async (req,res)=>{
+    const {quantity,itemId,user} = req.body;
+    if(!user)
+    {
+        return res.status(405).json('Login First');
+    }
+    const {id} = req.params;
+    user = await User.findById(user.id);
+    await user.populate('cartBooks').populate('cartItem');
+    let count = 0;
+    for( var i = 0; i < user.cartItem.length; i++){ 
+    
+        if ( user.cartItem[i] === id) { 
+    
+            count++;
+            if(count>quantity)
+            user.cartItem.splice(i, 1); 
+        }
+        
+    }
+    while(count<quantity)
+    {
+        user.cartItem.push(itemId);
+        count++;
+    }
+    await user.save();
+    return res.status(200).json('action successful');
+}
+module.exports.setQuantityItem = async (req,res)=>{
+    const {quantity,itemId,user} = req.body;
+    if(!user)
+    {
+        return res.status(405).json('Login First');
+    }
+    const {id} = req.params;
+    user = await User.findById(user.id);
+    await user.populate('cartBooks').populate('cartItem');
+    let count = 0;
+    for( var i = 0; i < user.cartBooks.length; i++){ 
+    
+        if ( user.cartBooks[i] === id) { 
+    
+            count++;
+            if(count>quantity)
+            user.cartBooks.splice(i, 1); 
+        }
+        
+    }
+    while(count<quantity)
+    {
+        user.cartBooks.push(itemId);
+        count++;
+    }
+    await user.save();
+    return res.status(200).json('action successful');
+}
