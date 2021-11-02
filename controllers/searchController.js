@@ -130,3 +130,41 @@ module.exports.searchBookCategoryRanged = async function (req, res) {
     }
 }
 
+module.exports.searchBookCategory = async function (req, res) {
+    try{
+        const books=await Ebook.find({
+            category:req.body.type
+        });
+        // const books=await Ebook.find({});
+        
+        return res.json({
+            ebooks:books
+            // Ebooks:books
+        });
+    }
+    catch(err) {
+        console.log(err);
+        return res.status(404).json('internal server error');
+    }
+}
+
+
+module.exports.searchBookAuthor = async function (req, res) {
+    try{
+        const books=await Ebook.find({
+            author:req.body.author
+        });
+          
+        return res.json({
+            ebooks:books
+            // Ebooks:books
+        });
+    }
+    catch(err) {
+        console.log(err);
+        return res.status(404).json('internal server error');
+    }
+}
+
+
+
