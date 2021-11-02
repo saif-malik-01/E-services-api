@@ -89,4 +89,44 @@ module.exports.searchItemCategoryCompany= async (req,res)=>{
     }
 }
 
+module.exports.searchItemCategoryRanged = async function (req, res) {
+    const {maxPrice,minPrice} = req.body;
+    try{
+        const items=await Item.find({
+            category:req.body.type,
+            price: { $lte: maxPrice || 1000000000, $gte: minPrice || 0 }
+        });
+        // const books=await Ebook.find({});
+        
+        return res.json({
+            items:items
+            // Ebooks:books
+        });
+    }
+    catch(err) {
+        console.log(err);
+        return res.status(404).json('internal server error');
+    }
+}
+
+
+module.exports.searchBookCategoryRanged = async function (req, res) {
+    const {maxPrice,minPrice} = req.body;
+    try{
+        const books=await Ebook.find({
+            category:req.body.type,
+            price: { $lte: maxPrice || 1000000000, $gte: minPrice || 0 }
+        });
+        // const books=await Ebook.find({});
+        
+        return res.json({
+            ebooks:books
+            // Ebooks:books
+        });
+    }
+    catch(err) {
+        console.log(err);
+        return res.status(404).json('internal server error');
+    }
+}
 
