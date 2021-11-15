@@ -1,25 +1,25 @@
 const mongoose = require("mongoose");
-const userSchema = new mongoose.Schema(
+const companySchema = new mongoose.Schema(
 	{
 	    Name: {
 			type: String,
 			required: true
 		},
-        
-		cartItem: [{
+        Events: [{
             type: mongoose.Schema.Types.ObjectId,
-			ref: "Item"
+			ref: "Event"
         }],
-
-        cartBooks:[{
+        Workshops: [{
             type: mongoose.Schema.Types.ObjectId,
-			ref: "Ebook"
+			ref: "Workshop"
         }]
+        
+		
 	},
 	{
 		timestamps: true,
 	}
 );
 
-const Event = mongoose.model("User", userSchema);
+const Event = mongoose.model("Event", eventSchema);
 module.exports = Event;

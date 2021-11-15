@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const {OAuth2Client} = require('google-auth-library');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const user = require('./model/user');
+const user = require('./models/user');
 const app = express();
 const cors = require("cors");
 require('dotenv').config();
