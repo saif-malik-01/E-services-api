@@ -87,6 +87,50 @@ app.post('/verify',async(req,res)=>{
 })
 
 
+
+
+// update user
+app.put('/user',async (req,res)=>{
+    if(req.body.userId === req.query.id){
+        try{
+            if(req.body.password){
+                req.body.password = await bcrypt.hash(req.body.password,4)
+            }
+            await user.findByIdAndUpdate(req.query.id,{$set:req.body});
+            return res.status(200).send("user updated");
+        }catch(err){
+            return res.status(500).send("server error")
+        }          
+    }else{
+        return res.status(401).send("connot update else user details")
+    }
+})
+
+
+// delete user
+app.delete('/user',async (req,res)=>{
+        try{
+            await user.findByIdAndDelete(req.query.id);
+            return res.status(200).send("deleted");
+        }catch(err){
+            return res.status(500).json(err);
+        }          
+})
+
+
+
+// get a user 
+app.get('/user',async (req,res)=>{    
+        try{
+            const User = await user.findById(req.query.id);
+            const {password,updatedAt,...others} = User._doc;
+            return res.status(200).json(others);
+        }catch(err){
+            return res.status(500).send("server error")
+        }              
+})
+
+
 app.listen(PORT,(err)=>{
     if(err)console.log('Server error',err);
     console.log('server running on port :',PORT);
