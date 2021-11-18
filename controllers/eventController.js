@@ -55,3 +55,24 @@ module.exports.deleteEvent = async (req,res)=>{
     }
 
 }
+
+
+module.exports.enroll=async (req,res)=>{
+    const {userId} = req.params;
+    const {eventId} = req.body;
+    let user = await user.findById(userId);
+    let event= await Event.findById(eventId);
+    event.participants.push(user._id);
+    event.save();
+    return res.json('success');
+}
+
+module.exports.unenroll=async (req,res)=>{
+    const {userId} = req.params;
+    const {eventId} = req.body;
+    let user = await user.findById(userId);
+    let event= await Event.findById(eventId);
+    await event.findByIdAndUpdate(event._id,{$pull: {userId}});
+    event.save();
+    return res.json('success');
+}
