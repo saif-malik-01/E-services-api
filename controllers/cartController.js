@@ -1,6 +1,6 @@
 const Item = require('../models/items');
 const User = require('../models/user');
-const Ebook = require('../models/ebook');
+const Ebook = require('../models/ebooks');
 module.exports.addToItemCart=async (req,res)=>{
     const {user} = req.body;
     const {itemId} = req.params; 

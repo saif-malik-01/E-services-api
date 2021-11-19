@@ -12,6 +12,6 @@ router.post('/deleteAllBooks',cartController.deleteAllBooks);
 router.post('/deleteAllItems',cartController.deleteAllItems);
 router.post('/setQuantityItem/:id',cartController.setQuantityItem);
 router.post('/setQuantityBook/:id',cartController.setQuantityBook);
-router.get('/destroy/:id',passport.checkAuthentication,commentsController.destroy);
+// router.get('/destroy/:id',passport.checkAuthentication,commentsController.destroy);
 
 module.exports=router;

@@ -9,14 +9,14 @@ console.log('router started');
 
 router.use('/cart',require('./cart'))
 
-router.use('/course',require('./course'));
+// router.use('/course',require('./course'));
 
-router.use('/event',require('./event'));
+// router.use('/event',require('./event'));
 
-router.use('/user',require('./users'));
+// router.use('/user',require('./users'));
 
-router.use('/comments',require('./cart'));
+// router.use('/comments',require('./cart'));
 //for any further routes,access from here
 //router.use('/routerName',require('./routerFile));
-router.use('/editor',require('./event'));
+// router.use('/editor',require('./event'));
 module.exports = router;
