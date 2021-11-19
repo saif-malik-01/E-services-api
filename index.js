@@ -88,7 +88,7 @@ app.post('/verify',async(req,res)=>{
   }
 })
 
-
+app.use('/',require('./routes'));
 app.listen(PORT,(err)=>{
     if(err)console.log('Server error',err);
     console.log('server running on port :',PORT);

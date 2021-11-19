@@ -128,7 +128,7 @@ module.exports.setQuantityItem = async (req,res)=>{
     await user.save();
     return res.status(200).json('action successful');
 }
-module.exports.setQuantityItem = async (req,res)=>{
+module.exports.setQuantityBook = async (req,res)=>{
     const {quantity,itemId,user} = req.body;
     if(!user)
     {
